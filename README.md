@@ -1,4 +1,4 @@
-# Sample Custom App Service App with OIDC Authentication
+# Sample App Service Container with Custom OIDC Authentication
 
 - [Intro](#intro)
 - [Why?](#why-)
