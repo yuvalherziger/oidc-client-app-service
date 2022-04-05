@@ -17,10 +17,12 @@ provider "azurerm" {
   features {}
 }
 
+data "azuread_client_config" "current" {}
+
 # Provision Azure AD App registration:
 resource "azuread_application" "app_registration" {
   display_name = "Sample OIDC Auth App ${random_id.app-suffix.hex}"
-
+  owners       = [data.azuread_client_config.current.object_id]
   optional_claims {
 
     id_token {
@@ -100,7 +102,7 @@ resource "azuread_application_password" "app_registration_secret" {
 
 # Provision a resource group:
 resource "azurerm_resource_group" "sample_oidc_app_resource_group" {
-  name     = "sampleoidcclientapp${random_id.app-suffix.hex}"
+  name     = "sample-oidc-client-app-${random_id.app-suffix.hex}"
   location = var.location
 }
 
@@ -138,7 +140,7 @@ resource "azurerm_service_plan" "sample_oidc_app_svc_plan" {
   location            = var.location
   resource_group_name = azurerm_resource_group.sample_oidc_app_resource_group.name
   os_type             = "Linux"
-  sku_name            = "P1v2"
+  sku_name            = "B1"
   depends_on          = [null_resource.docker_push]
 }
 
