@@ -18,7 +18,7 @@ However, in some cases, you would want to have the authenticating client impleme
 
 ## Architecture
 
-To be added.
+To be added soon.
 
 ## Installation
 
