@@ -9,10 +9,10 @@ This project contains a sample Node.js server app that
 ## Why?
 
 [Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/overview), similarly to other compute services in Azure, supports built-in authentication using [Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/authentication/overview-authentication).
-However, in some cases, you would want to have the authenticating client implemented in your workload with its own OpenID Connect client:
+However, in some cases, you would want to have the authenticating client implemented in your workload with its own OpenID Connect client, sample reasons:
 
-* You need consume custom claims from your user's tokens
-* You have an existing application with established permissions, roles, and attributes, and you need
+* You need to consume/use custom claims from your user's tokens.
+* You have an existing application with established permissions, roles, and attributes, yet you need
   to map them to Azure AD user claims (e.g., Azure Application Roles should be mapped to your application's roles).
 * You have a requirement to protect only subsets of your endpoints with OIDC.
 
@@ -38,10 +38,16 @@ In order to build the application's image, run the following command:
 make build-image
 ```
 
+Note, you are required to have a user on dockerhub and logged in for this to run. In few scenarios you might need to run it in an elevated way:
+
+```bash
+sudo make build-image
+```
+
 You can verify the image has been built successfully by running `docker images`.  You should see
 a line indicating that the `sample-oidc-client-app` is present in your Docker daemon, e.g.:
 
-```
+```zsh
 REPOSITORY              TAG       IMAGE ID       CREATED       SIZE
 sample-oidc-client-app  latest    93f1bd0ceefc   6 hours ago   118MB
 ```
@@ -93,7 +99,7 @@ terraform init
 Run the following command to validate the deployment:
 
 ```bash
-terraform plan
+terraform plan -out oidc.plan
 ```
 
 If everything ran successfully, the Terraform CLI should present to
@@ -102,7 +108,7 @@ you a summary of the resources to be provisioned.
 Lastly, deploy the application using the following command:
 
 ```bash
-terraform apply
+terraform apply "oidc.plan"
 ```
 
 Please note that this step should take a while, especially the `null_resource.docker_push` resource,
