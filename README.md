@@ -6,6 +6,16 @@ This project contains a sample Node.js server app that
 * is deployed as an Azure App Service resource using Terraform (see below) or Bicep (coming soon);
 * authenticates with Azure Active Directory over OIDC, in a way that the application can consume custom token claims.
 
+- [Why?](#why-)
+- [Architecture](#architecture)
+- [Installation](#installation)
+  * [Requirements](#requirements)
+  * [Step 1: Build the Image](#step-1--build-the-image)
+  * [Step 2: Log In with the Azure CLI](#step-2--log-in-with-the-azure-cli)
+  * [Step 3: Configure the Deployment](#step-3--configure-the-deployment)
+  * [Step 4: Deploy](#step-4--deploy)
+- [Further Customizations](#further-customizations)
+
 ## Why?
 
 [Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/overview), similarly to other compute services in Azure, supports built-in authentication using [Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/authentication/overview-authentication).
@@ -18,7 +28,7 @@ However, in some cases, you would want to have the authenticating client impleme
 
 ## Architecture
 
-To be added soon.
+![Architecture](./media/arc.png)
 
 ## Installation
 
@@ -29,6 +39,7 @@ To be added soon.
 * [Docker](https://docs.docker.com/desktop/) - you'll need to have Docker installed in order to build the app's image
 * [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) - you'll need to have Azure CLI installed in order
   to log into Azure from your terminal.
+* A Linux/WSL/macOS terminal
 
 ### Step 1: Build the Image
 
@@ -38,7 +49,7 @@ In order to build the application's image, run the following command:
 make build-image
 ```
 
-Note, you are required to have a user on dockerhub and logged in for this to run. In few scenarios you might need to run it in an elevated way:
+Please note that you might be required to have a [Docker Hub](https://hub.docker.com/) user and logged in for this to run. In few scenarios you might need to run it in an elevated way:
 
 ```bash
 sudo make build-image
@@ -163,3 +174,10 @@ In your Active Directory tenant, you'll find an App Registration, configured to 
 for your App Service instance.
 
 ![AAD App Registration](./media/aad-app-reg.png)
+
+## Further Customizations
+
+To be added.  Topics to cover:
+
+* Documentation on adding custom ID token claims
+* Adding application roles as ID token claims
