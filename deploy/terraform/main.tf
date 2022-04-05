@@ -127,13 +127,6 @@ resource "null_resource" "docker_push" {
   depends_on = [azurerm_container_registry.acr_repo]
 }
 
-# Provision a managed identity:
-resource "azurerm_user_assigned_identity" "app_service_managed_identity" {
-  resource_group_name = azurerm_resource_group.sample_oidc_app_resource_group.name
-  location            = var.location
-  name                = "sampleoidcclientapp${random_id.app-suffix.hex}"
-}
-
 # Provision App Service Plan:
 resource "azurerm_service_plan" "sample_oidc_app_svc_plan" {
   name                = "sample-oidc-client-app-${random_id.app-suffix.hex}"
