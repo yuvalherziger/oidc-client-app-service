@@ -6,6 +6,16 @@ This project contains a sample Node.js server app that
 * is deployed as an Azure App Service resource using Terraform (see below) or Bicep (coming soon);
 * authenticates with Azure Active Directory over OIDC, in a way that the application can consume custom token claims.
 
+- [Why?](#why-)
+- [Architecture](#architecture)
+- [Installation](#installation)
+  * [Requirements](#requirements)
+  * [Step 1: Build the Image](#step-1--build-the-image)
+  * [Step 2: Log In with the Azure CLI](#step-2--log-in-with-the-azure-cli)
+  * [Step 3: Configure the Deployment](#step-3--configure-the-deployment)
+  * [Step 4: Deploy](#step-4--deploy)
+- [Further Customizations](#further-customizations)
+
 ## Why?
 
 [Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/overview), similarly to other compute services in Azure, supports built-in authentication using [Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/authentication/overview-authentication).
