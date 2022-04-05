@@ -8,7 +8,7 @@ This project contains a sample Node.js server app that
 
 ## Why?
 
-Azure App Service, similarly to other compute services in Azure, supports built-in authentication using Azure Active Directory.
+[Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/overview), similarly to other compute services in Azure, supports built-in authentication using [Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/authentication/overview-authentication).
 However, in some cases, you would want to have the authenticating client implemented in your workload with its own OpenID Connect client:
 
 * You need consume custom claims from your user's tokens
