@@ -4,30 +4,30 @@
 - [Why?](#why-)
 - [Architecture](#architecture)
 - [Installation](#installation)
-  * [Requirements](#requirements)
-  * [Step 1: Build the Image](#step-1--build-the-image)
-  * [Step 2: Log In with the Azure CLI](#step-2--log-in-with-the-azure-cli)
-  * [Step 3: Configure the Deployment](#step-3--configure-the-deployment)
-  * [Step 4: Deploy](#step-4--deploy)
+  - [Requirements](#requirements)
+  - [Step 1: Build the Image](#step-1--build-the-image)
+  - [Step 2: Log In with the Azure CLI](#step-2--log-in-with-the-azure-cli)
+  - [Step 3: Configure the Deployment](#step-3--configure-the-deployment)
+  - [Step 4: Deploy](#step-4--deploy)
 - [Further Customizations](#further-customizations)
 
 ## Intro
 
 This project contains a sample Node.js server app that
 
-* is built as a docker image and pushed into an ACR container repo;
-* is deployed as an Azure App Service resource using Terraform (see below) or Bicep (coming soon);
-* authenticates with Azure Active Directory over OIDC, in a way that the application can consume custom token claims.
+- is built as a docker image and pushed into an ACR container repo;
+- is deployed as an Azure App Service resource using Terraform (see below) or Bicep (coming soon);
+- authenticates with Azure Active Directory over OIDC, in a way that the application can consume custom token claims.
 
 ## Why?
 
 [Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/overview), similarly to other compute services in Azure, supports built-in authentication using [Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/authentication/overview-authentication).
 However, in some cases, you would want to have the authenticating client implemented in your workload with its own OpenID Connect client, sample reasons:
 
-* You need to consume/use custom claims from your user's tokens.
-* You have an existing application with established permissions, roles, and attributes, yet you need
+- You need to consume/use custom claims from your user's tokens.
+- You have an existing application with established permissions, roles, and attributes, yet you need
   to map them to Azure AD user claims (e.g., Azure Application Roles should be mapped to your application's roles).
-* You have a requirement to protect only subsets of your endpoints with OIDC.
+- You have a requirement to protect only subsets of your endpoints with OIDC.
 
 ## Architecture
 
@@ -37,12 +37,12 @@ However, in some cases, you would want to have the authenticating client impleme
 
 ### Requirements
 
-* [Terraform CLI](https://learn.hashicorp.com/tutorials/terraform/install-cli) - you'll need to install the Terraform CLI in order
+- [Terraform CLI](https://learn.hashicorp.com/tutorials/terraform/install-cli) - you'll need to install the Terraform CLI in order
   to provision resources.
-* [Docker](https://docs.docker.com/desktop/) - you'll need to have Docker installed in order to build the app's image
-* [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) - you'll need to have Azure CLI installed in order
+- [Docker](https://docs.docker.com/desktop/) - you'll need to have Docker installed in order to build the app's image
+- [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) - you'll need to have Azure CLI installed in order
   to log into Azure from your terminal.
-* A Linux/WSL/macOS terminal
+- A Linux/WSL/macOS terminal
 
 ### Step 1: Build the Image
 
@@ -94,12 +94,12 @@ cp deploy/terraform/terraform.tfvars.example deploy/terraform/terraform.tfvars
 You should now have a file named `terraform.tfvars` under the `deploy/terraform` directory.
 Your configuration file contains the following variables; change their values as required:
 
-* `subscription_id` (required): Your Azure account's subscription ID.
-* `tenant_id` (required): The ID of the Azure Active Directory tenant under which
+- `subscription_id` (required): Your Azure account's subscription ID.
+- `tenant_id` (required): The ID of the Azure Active Directory tenant under which
   you'd like to provision the App Registration in.
-* `allow_multiple_orgs` (default: `false`): Whether you'd like the App to allow authentication
+- `allow_multiple_orgs` (default: `false`): Whether you'd like the App to allow authentication
   using **any** work/school Azure AD tenant.
-* `location` (default: `"eastus"`): The Azure region in which you'd like to provision your resources.
+- `location` (default: `"eastus"`): The Azure region in which you'd like to provision your resources.
 
 ### Step 4: Deploy
 
@@ -130,7 +130,7 @@ which pushes your app's container image to ACR.
 
 If all resources were provisioned successfully, you should see a Terraform output along the following lines:
 
-```
+```zsh
 Apply complete! Resources: 10 added, 0 changed, 0 destroyed.
 
 Outputs:
@@ -166,10 +166,9 @@ What's Provisioned?
 Inside your newly created resource group `sampleoidcclientappb<<RANDOM-HASH>>`, you'll find that the following resources
 have been provisioned:
 
-* **App Service Plan**
-* **App Service**
-* **Container Registry**: ACR is where your container image is hosted.
-* **Managed Identity**: Assigned to your App Service with an `ACRPull` role.
+- **App Service Plan**
+- **App Service** Assigned with an `ACRPull` role, enabling it to pull from the ACR.
+- **Container Registry**: ACR is where your container image is hosted.
 
 ![Resource group](./media/rg.png)
 
@@ -182,5 +181,5 @@ for your App Service instance.
 
 To be added.  Topics to cover:
 
-* Documentation on adding custom ID token claims
-* Adding application roles as ID token claims
+- Documentation on adding custom ID token claims
+- Adding application roles as ID token claims
