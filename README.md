@@ -1,11 +1,6 @@
 # Sample Custom App Service App with OIDC Authentication
 
-This project contains a sample Node.js server app that
-
-* is built as a docker image and pushed into an ACR container repo;
-* is deployed as an Azure App Service resource using Terraform (see below) or Bicep (coming soon);
-* authenticates with Azure Active Directory over OIDC, in a way that the application can consume custom token claims.
-
+- [Intro](#intro)
 - [Why?](#why-)
 - [Architecture](#architecture)
 - [Installation](#installation)
@@ -15,6 +10,14 @@ This project contains a sample Node.js server app that
   * [Step 3: Configure the Deployment](#step-3--configure-the-deployment)
   * [Step 4: Deploy](#step-4--deploy)
 - [Further Customizations](#further-customizations)
+
+## Intro
+
+This project contains a sample Node.js server app that
+
+* is built as a docker image and pushed into an ACR container repo;
+* is deployed as an Azure App Service resource using Terraform (see below) or Bicep (coming soon);
+* authenticates with Azure Active Directory over OIDC, in a way that the application can consume custom token claims.
 
 ## Why?
 
