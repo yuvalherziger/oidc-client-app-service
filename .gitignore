@@ -166,3 +166,5 @@ terraform.rc
 
 
 .DS_Store
+deploy/terraform/.terraform.lock.hcl
+deploy/terraform/oidc.plan
